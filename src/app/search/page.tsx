@@ -1,26 +1,11 @@
 import Link from "next/link";
+import NavBar from "../components/NavBar";
 
 const Search = () => {
   return (
     <div className="min-h-screen w-screen bg-gray-100">
       <header className="max-w-screen-2xl m-auto bg-white">
-        <nav className="bg-white p-4 flex justify-between items-center">
-          <Link href="/" className="font-bold text-gray-700 text-2xl">
-            {" "}
-            OpenDine{" "}
-          </Link>
-          <div>
-            <div className="flex gap-2 lg:gap-5">
-              <button className="bg-blue-400 text-white border p-1 px-4 rounded-md">
-                Sign in
-              </button>
-              <button className="text-black border p-1 px-4 rounded-md">
-                Sign up
-              </button>
-            </div>
-          </div>
-        </nav>
-
+        <NavBar />
         <div className="bg-gradient-to-r from-[#5f6984] to-[#0f1f47] p-2">
           <div className="text-left text-sm lg:text-lg py-3 m-auto flex justify-center">
             <input

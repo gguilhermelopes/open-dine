@@ -1,26 +1,11 @@
+import NavBar from "@/app/components/NavBar";
 import Link from "next/link";
 
 const RestaurantMenu = () => {
   return (
     <div className="min-h-screen w-screen bg-gray-100">
       <header className="max-w-screen-2xl m-auto bg-white">
-        <nav className="bg-white p-4 flex justify-between items-center">
-          <Link href="/" className="font-bold text-gray-700 text-2xl">
-            {" "}
-            OpenDine{" "}
-          </Link>
-          <div>
-            <div className="flex gap-5">
-              <button className="bg-blue-400 text-white border p-1 px-4 rounded-md">
-                Sign in
-              </button>
-              <button className="text-black border p-1 px-4 rounded-md">
-                Sign up
-              </button>
-            </div>
-          </div>
-        </nav>
-
+        <NavBar />
         <div className="h-80 sm:h-96 overflow-hidden">
           <div className="bg-center bg-gradient-to-r from-[#0f1f47] to-[#5f6984] h-full flex justify-center items-center">
             <h1 className="text-5xl lg:text-7xl md:text-6xl text-white capitalize text-shadow text-center">
