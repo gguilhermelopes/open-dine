@@ -1,12 +1,14 @@
+import Link from "next/link";
+
 const RestaurantDetails = () => {
   return (
     <div className="min-h-screen w-screen bg-gray-100">
       <header className="max-w-screen-2xl m-auto bg-white">
         <nav className="bg-white p-4 flex justify-between items-center">
-          <a href="" className="font-bold text-gray-700 text-2xl">
+          <Link href="/" className="font-bold text-gray-700 text-2xl">
             {" "}
             OpenDine{" "}
-          </a>
+          </Link>
           <div>
             <div className="flex gap-5">
               <button className="bg-blue-400 text-white border p-1 px-4 rounded-md">
@@ -32,8 +34,8 @@ const RestaurantDetails = () => {
         <section className="flex flex-col lg:flex-row m-auto lg:w-2/3 lg:justify-between items-start 0 mt-10 lg:-mt-11 text-gray-800">
           <div className="bg-white w-[70%] m-auto rounded p-3 shadow">
             <nav className="flex gap-7 test-reg border-b pb-2 ">
-              <a href="">Overview</a>
-              <a href="">Menu</a>
+              <Link href="/restaurant/terraco-jardins">Overview</Link>
+              <Link href="/restaurant/terraco-jardins/menu">Menu</Link>
             </nav>
 
             <div className="mt-4 border-b pb-6">
