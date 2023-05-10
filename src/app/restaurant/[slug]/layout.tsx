@@ -1,5 +1,10 @@
 import Header from "./components/Header";
 
+export const metadata = {
+  title: "Terraço Jardins | Open Dine",
+  description: "Open Dine",
+};
+
 const RestaurantLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
