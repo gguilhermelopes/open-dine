@@ -1,3 +1,4 @@
+"use client";
 const ReservationCard = () => {
   return (
     <div className="lg:fixed lg:w-[20%] bg-white rounded p-3 shadow flex flex-col">
