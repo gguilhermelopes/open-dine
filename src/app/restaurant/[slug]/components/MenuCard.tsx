@@ -1,12 +1,16 @@
-const MenuCard = () => {
+import { Item } from "@prisma/client";
+
+const MenuCard = ({ item }: { item: Item }) => {
   return (
     <div className="border rounded p-3 w-screen sm:w-[49%] mb-3">
-      <h3 className="font-bold text-lg">Hamburger and Fries</h3>
-      <p className="font-light mt-1 text-sm">
-        Classic American meal: juicy beef patty, melted cheese, crispy fries;
-        savory, satisfying, and undeniably delicious.
+      <h3 className="font-bold text-lg">{item.name}</h3>
+      <p className="font-light mt-1 text-sm">{item.description}</p>
+      <p className="mt-7">
+        {item.price.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })}
       </p>
-      <p className="mt-7">$30</p>
     </div>
   );
 };
