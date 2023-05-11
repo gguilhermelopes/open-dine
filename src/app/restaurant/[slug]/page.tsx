@@ -40,11 +40,11 @@ const RestaurantDetails = async ({ params }: { params: { slug: string } }) => {
   return (
     <>
       <div className="bg-white w-[70%] m-auto rounded p-3 shadow">
-        <RestaurantNavbar />
-        <Title />
+        <RestaurantNavbar slug={params.slug} />
+        <Title name={restaurantData.name} />
         <Rating />
-        <Description />
-        <RestaurantImages />
+        <Description description={restaurantData.description} />
+        <RestaurantImages images={restaurantData.images} />
         <Reviews />
       </div>
       <div className="lg:w-[27%] w-full p-10 lg:p-0 lg:relative text-reg text-gray-800">
