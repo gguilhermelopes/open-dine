@@ -7,6 +7,11 @@ import { select } from "../page";
 
 const prisma = new PrismaClient();
 
+export interface cuisineAndLocationType {
+  id: number;
+  name: string;
+}
+
 const fetchRestaurantsByCity = (
   city: string
 ): Promise<RestaurantCardType[]> => {
@@ -23,11 +28,22 @@ const fetchRestaurantsByCity = (
   });
 };
 
+const locationFetch = (): Promise<cuisineAndLocationType[]> => {
+  return prisma.location.findMany({ select: { id: true, name: true } });
+};
+
+const cuisineFetch = (): Promise<cuisineAndLocationType[]> => {
+  return prisma.cuisine.findMany({ select: { id: true, name: true } });
+};
+
 const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
   const { city } = searchParams;
   const restaurants = await fetchRestaurantsByCity(
     city.toLowerCase().trimStart()
   );
+
+  const cities = await locationFetch();
+  const cuisines = await cuisineFetch();
 
   return (
     <>
@@ -35,7 +51,7 @@ const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
         <SearchBar />
       </div>
       <main className="flex py-4 m-auto gap-8 justify-between items-start w-2/3 text-gray-800">
-        <SearchSideBar />
+        <SearchSideBar cuisines={cuisines} cities={cities} />
         <div className="w-5/6 flex flex-col gap-4">
           {restaurants.length ? (
             restaurants.map((restaurant) => (
