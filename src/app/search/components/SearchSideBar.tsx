@@ -11,14 +11,18 @@ const SearchSideBar = ({
     <div className="w-1/5">
       <div className="border-b pb-5 capitalize">
         <h1 className="mb-2">Region</h1>
-        {locations.map((city) => (
-          <p className="font-light text-reg">{city.name}</p>
+        {locations.map((location) => (
+          <p key={location.id} className="font-light text-reg">
+            {location.name}
+          </p>
         ))}
       </div>
       <div className="border-b pb-4 mt-5 capitalize">
         <h1 className="mb-2">Cuisine</h1>
         {cuisines.map((cuisine) => (
-          <p className="font-light text-reg">{cuisine.name}</p>
+          <p key={cuisine.id} className="font-light text-reg">
+            {cuisine.name}
+          </p>
         ))}
       </div>
       <div className="mt-3 pb-4">

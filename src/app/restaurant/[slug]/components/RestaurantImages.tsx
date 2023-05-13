@@ -6,8 +6,12 @@ const RestaurantImages = ({ images }: { images: string[] }) => {
         {images.length === 1 ? "" : "s"}
       </h1>
       <div className="flex flex-wrap gap-4 mt-6 justify-center">
-        {images.map((image) => (
-          <img src={image} className="w-56 h-44 rounded" />
+        {images.map((image, index) => (
+          <img
+            key={`image ${index}`}
+            src={image}
+            className="w-56 h-44 rounded"
+          />
         ))}
       </div>
     </div>
