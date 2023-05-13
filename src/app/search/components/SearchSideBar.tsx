@@ -1,17 +1,17 @@
 import { Cuisine, Location } from "@prisma/client";
 
 const SearchSideBar = ({
-  location,
+  locations,
   cuisines,
 }: {
-  location: Location[];
+  locations: Location[];
   cuisines: Cuisine[];
 }) => {
   return (
     <div className="w-1/5">
       <div className="border-b pb-5 capitalize">
         <h1 className="mb-2">Region</h1>
-        {location.map((city) => (
+        {locations.map((city) => (
           <p className="font-light text-reg">{city.name}</p>
         ))}
       </div>

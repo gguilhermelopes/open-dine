@@ -37,7 +37,7 @@ const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
     city.toLowerCase().trimStart()
   );
 
-  const location = await locationFetch();
+  const locations = await locationFetch();
   const cuisines = await cuisineFetch();
 
   return (
@@ -46,7 +46,7 @@ const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
         <SearchBar />
       </div>
       <main className="flex py-4 m-auto gap-8 justify-between items-start w-2/3 text-gray-800">
-        <SearchSideBar cuisines={cuisines} location={location} />
+        <SearchSideBar cuisines={cuisines} locations={locations} />
         <div className="w-5/6 flex flex-col gap-4">
           {restaurants.length ? (
             restaurants.map((restaurant) => (
