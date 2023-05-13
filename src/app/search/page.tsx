@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Cuisine, Location, PrismaClient } from "@prisma/client";
 import SearchBar from "../components/SearchBar";
 import RestaurantCard from "./components/RestaurantCard";
 import SearchSideBar from "./components/SearchSideBar";
@@ -6,11 +6,6 @@ import { RestaurantCardType } from "../page";
 import { select } from "../page";
 
 const prisma = new PrismaClient();
-
-export interface cuisineAndLocationType {
-  id: number;
-  name: string;
-}
 
 const fetchRestaurantsByCity = (
   city: string
@@ -28,12 +23,12 @@ const fetchRestaurantsByCity = (
   });
 };
 
-const locationFetch = (): Promise<cuisineAndLocationType[]> => {
-  return prisma.location.findMany({ select: { id: true, name: true } });
+const locationFetch = (): Promise<Location[]> => {
+  return prisma.location.findMany();
 };
 
-const cuisineFetch = (): Promise<cuisineAndLocationType[]> => {
-  return prisma.cuisine.findMany({ select: { id: true, name: true } });
+const cuisineFetch = (): Promise<Cuisine[]> => {
+  return prisma.cuisine.findMany();
 };
 
 const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
@@ -42,7 +37,7 @@ const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
     city.toLowerCase().trimStart()
   );
 
-  const cities = await locationFetch();
+  const location = await locationFetch();
   const cuisines = await cuisineFetch();
 
   return (
@@ -51,7 +46,7 @@ const Search = async ({ searchParams }: { searchParams: { city: string } }) => {
         <SearchBar />
       </div>
       <main className="flex py-4 m-auto gap-8 justify-between items-start w-2/3 text-gray-800">
-        <SearchSideBar cuisines={cuisines} cities={cities} />
+        <SearchSideBar cuisines={cuisines} location={location} />
         <div className="w-5/6 flex flex-col gap-4">
           {restaurants.length ? (
             restaurants.map((restaurant) => (
