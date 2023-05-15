@@ -2,11 +2,7 @@ import Link from "next/link";
 import { RestaurantCardType } from "../page";
 import Price from "./Price";
 
-interface Props {
-  restaurant: RestaurantCardType;
-}
-
-const RestaurantCard = ({ restaurant }: Props) => {
+const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
   return (
     <Link href={`restaurant/${restaurant.slug}`}>
       <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer text-gray-800">
@@ -19,7 +15,9 @@ const RestaurantCard = ({ restaurant }: Props) => {
           <h3 className="font-bold text-2xl mb-2">{restaurant.name}</h3>
           <div className="flex gap-3 items-start">
             <div className="flex mb-2">*****</div>
-            <p>77 reviews</p>
+            <p>{`${restaurant.reviews.length} ${
+              restaurant.reviews.length === 1 ? "review" : "reviews"
+            }`}</p>
           </div>
           <div className="flex gap-3 text-reg font-light capitalize">
             <p>{restaurant.cuisine.name}</p>
