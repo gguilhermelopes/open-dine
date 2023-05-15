@@ -13,7 +13,7 @@ const Reviews = ({ reviews }: { reviews: Review[] }) => {
             }`}
           </h3>
           {reviews.map((review) => (
-            <ReviewCard review={review} />
+            <ReviewCard key={review.id} review={review} />
           ))}
         </>
       ) : (

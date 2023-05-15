@@ -2,6 +2,7 @@ import Link from "next/link";
 import Price from "@/app/components/Price";
 import { RestaurantCardType } from "@/app/page";
 import calculateReviewRatingAverage from "../../../../utils/calculateReviewRatingAverage";
+import Stars from "@/app/components/Stars";
 
 const setTextRating = (rating: number): string => {
   if (rating >= 4.5) return "Exceptional";
@@ -22,8 +23,8 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
       />
       <div>
         <h2 className="text-3xl text-[#0f1f47]">{restaurant.name}</h2>
-        <div className="flex items-start gap-2">
-          <div className="flex mb-2">*****</div>
+        <div className="flex items-center gap-2">
+          <Stars reviews={restaurant.reviews} />
           <p className="text-sm">{textRating}</p>
         </div>
 

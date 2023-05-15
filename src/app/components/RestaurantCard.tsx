@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { RestaurantCardType } from "../page";
 import Price from "./Price";
+import Stars from "./Stars";
 
 const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
   return (
@@ -12,9 +13,9 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
           className="w-full h-[50%] object-cover"
         />
         <div className="p-3">
-          <h3 className="font-bold text-2xl mb-2">{restaurant.name}</h3>
-          <div className="flex gap-3 items-start">
-            <div className="flex mb-2">*****</div>
+          <h3 className="font-bold text-xl mb-2">{restaurant.name}</h3>
+          <div className="flex gap-3 items-center ">
+            <Stars reviews={restaurant.reviews} />
             <p>{`${restaurant.reviews.length} ${
               restaurant.reviews.length === 1 ? "review" : "reviews"
             }`}</p>
