@@ -7,20 +7,43 @@ import { select } from "../page";
 
 const prisma = new PrismaClient();
 
-const fetchRestaurantsByCity = (
-  city: string
+export interface SearchParams {
+  city?: string;
+  cuisine?: string;
+  price?: PRICE;
+}
+
+const fetchRestaurantsFiltered = (
+  searchParams: SearchParams
 ): Promise<RestaurantCardType[]> => {
-  if (!city) return prisma.restaurant.findMany({ select });
-  return prisma.restaurant.findMany({
-    where: {
-      location: {
-        name: {
-          equals: city,
-        },
+  const where: any = {};
+
+  if (searchParams.city) {
+    const location = {
+      name: {
+        equals: searchParams.city.toLowerCase(),
       },
-    },
-    select,
-  });
+    };
+    where.location = location;
+  }
+
+  if (searchParams.cuisine) {
+    const cuisine = {
+      name: {
+        equals: searchParams.cuisine.toLowerCase(),
+      },
+    };
+    where.cuisine = cuisine;
+  }
+
+  if (searchParams.price) {
+    const price = {
+      equals: searchParams.price,
+    };
+    where.price = price;
+  }
+
+  return prisma.restaurant.findMany({ where, select });
 };
 
 const locationFetch = (): Promise<Location[]> => {
@@ -31,15 +54,8 @@ const cuisineFetch = (): Promise<Cuisine[]> => {
   return prisma.cuisine.findMany();
 };
 
-const Search = async ({
-  searchParams,
-}: {
-  searchParams: { city?: string; cuisine?: string; price?: PRICE };
-}) => {
-  const { city } = searchParams;
-  const restaurants = await fetchRestaurantsByCity(
-    city ? city.toLowerCase().trimStart() : ""
-  );
+const Search = async ({ searchParams }: { searchParams: SearchParams }) => {
+  const restaurants = await fetchRestaurantsFiltered(searchParams);
 
   const locations = await locationFetch();
   const cuisines = await cuisineFetch();

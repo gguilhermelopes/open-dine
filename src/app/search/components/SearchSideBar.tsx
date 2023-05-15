@@ -1,5 +1,6 @@
 import { Cuisine, Location, PRICE } from "@prisma/client";
 import Link from "next/link";
+import { SearchParams } from "../page";
 
 const SearchSideBar = ({
   locations,
@@ -8,7 +9,7 @@ const SearchSideBar = ({
 }: {
   locations: Location[];
   cuisines: Cuisine[];
-  searchParams: { city?: string; cuisine?: string; price?: PRICE };
+  searchParams: SearchParams;
 }) => {
   const prices = [
     {
@@ -64,20 +65,17 @@ const SearchSideBar = ({
       <div className="mt-3 pb-4">
         <h1 className="mb-2">Price</h1>
         <div className="flex text-center">
-          {prices.map(({ price, label, className }) => {
-            const finalPrice = price.toLowerCase();
-            return (
-              <Link
-                className={className}
-                href={{
-                  pathname: "/search",
-                  query: { ...searchParams, price: finalPrice },
-                }}
-              >
-                {label}
-              </Link>
-            );
-          })}
+          {prices.map(({ price, label, className }) => (
+            <Link
+              className={className}
+              href={{
+                pathname: "/search",
+                query: { ...searchParams, price },
+              }}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
       </div>
     </div>
