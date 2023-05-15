@@ -2,6 +2,11 @@ import { Cuisine, Location, PRICE } from "@prisma/client";
 import Link from "next/link";
 import { SearchParams } from "../page";
 
+const isEqual = (a: string | undefined, b: string | undefined) => {
+  if (a === b) return true;
+  else return false;
+};
+
 const SearchSideBar = ({
   locations,
   cuisines,
@@ -34,48 +39,64 @@ const SearchSideBar = ({
     <div className="w-1/5">
       <div className="border-b pb-5 capitalize flex flex-col">
         <h1 className="mb-2">Region</h1>
-        {locations.map((location) => (
-          <Link
-            href={{
-              pathname: "/search",
-              query: { ...searchParams, city: location.name },
-            }}
-            key={location.id}
-            className="font-light text-reg"
-          >
-            {location.name}
-          </Link>
-        ))}
+        {locations.map((location) => {
+          const equal = isEqual(searchParams.city, location.name);
+          return (
+            <Link
+              href={{
+                pathname: "/search",
+                query: { ...searchParams, city: location.name },
+              }}
+              key={location.id}
+              className={`${
+                equal ? "font-semibold text-blue-800" : "font-light"
+              } text-reg`}
+            >
+              {location.name}
+            </Link>
+          );
+        })}
       </div>
       <div className="border-b pb-4 mt-5 capitalize flex flex-col">
         <h1 className="mb-2">Cuisine</h1>
-        {cuisines.map((cuisine) => (
-          <Link
-            href={{
-              pathname: "/search",
-              query: { ...searchParams, cuisine: cuisine.name },
-            }}
-            key={cuisine.id}
-            className="font-light text-reg"
-          >
-            {cuisine.name}
-          </Link>
-        ))}
+        {cuisines.map((cuisine) => {
+          const equal = isEqual(searchParams.cuisine, cuisine.name);
+          return (
+            <Link
+              href={{
+                pathname: "/search",
+                query: { ...searchParams, cuisine: cuisine.name },
+              }}
+              key={cuisine.id}
+              className={`${
+                equal ? "font-semibold text-blue-800" : "font-light"
+              } text-reg`}
+            >
+              {cuisine.name}
+            </Link>
+          );
+        })}
       </div>
       <div className="mt-3 pb-4">
         <h1 className="mb-2">Price</h1>
         <div className="flex text-center">
-          {prices.map(({ price, label, className }) => (
-            <Link
-              className={className}
-              href={{
-                pathname: "/search",
-                query: { ...searchParams, price },
-              }}
-            >
-              {label}
-            </Link>
-          ))}
+          {prices.map(({ price, label, className }) => {
+            const equal = isEqual(searchParams.price, price);
+
+            return (
+              <Link
+                className={`${
+                  equal && "bg-gray-200 font-semibold text-blue-800"
+                } ${className}`}
+                href={{
+                  pathname: "/search",
+                  query: { ...searchParams, price },
+                }}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

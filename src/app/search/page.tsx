@@ -78,7 +78,7 @@ const Search = async ({ searchParams }: { searchParams: SearchParams }) => {
             ))
           ) : (
             <p className="text-center pt-10 text-2xl">
-              No restaurants found in this area.
+              No restaurants found with this filters.
             </p>
           )}
         </div>
