@@ -1,8 +1,18 @@
 import Link from "next/link";
 import Price from "@/app/components/Price";
 import { RestaurantCardType } from "@/app/page";
+import calculateReviewRatingAverage from "../../../../utils/calculateReviewRatingAverage";
+
+const setTextRating = (rating: number): string => {
+  if (rating >= 4.5) return "Exceptional";
+  else if (rating >= 3.5 && rating < 4.5) return "Awesome";
+  else if (rating >= 2.5 && rating < 3.5) return "Great";
+  else return "Good";
+};
 
 const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
+  const reviewAvg = calculateReviewRatingAverage(restaurant.reviews);
+  const textRating = setTextRating(reviewAvg);
   return (
     <div className="border-b flex pb-5 gap-5">
       <img
@@ -14,7 +24,7 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
         <h2 className="text-3xl text-[#0f1f47]">{restaurant.name}</h2>
         <div className="flex items-start gap-2">
           <div className="flex mb-2">*****</div>
-          <p className="text-sm">Exceptional</p>
+          <p className="text-sm">{textRating}</p>
         </div>
 
         <div className="mb-9">
