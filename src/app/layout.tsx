@@ -1,8 +1,8 @@
 import NavBar from "./components/NavBar";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Cabin, Inter, Josefin_Sans } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const cabin = Cabin({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Open Dine | Table for any occasion!",
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen w-full bg-gray-100`}>
+      <body className={`${cabin.className} min-h-screen w-full bg-gray-100`}>
         <header className="max-w-screen-2xl m-auto bg-white">
           <NavBar />
         </header>
