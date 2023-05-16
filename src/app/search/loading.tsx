@@ -9,7 +9,7 @@ const loading = () => {
       </div>
       <div className="flex py-4 m-auto gap-8 justify-between items-start w-2/3">
         <div className="w-1/5 h-80 animate-pulse bg-slate-200" />
-        <div className="w-5/6 h-screen animate-pulse bg-slate-200"></div>
+        <div className="w-5/6 h-[700px] animate-pulse bg-slate-200"></div>
       </div>
     </>
   );
