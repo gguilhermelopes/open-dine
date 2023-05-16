@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Price from "@/app/components/Price";
-import { RestaurantCardType } from "@/app/page";
+import { RestaurantCardType } from "@/app/restaurant/page";
 import calculateReviewRatingAverage from "../../../../utils/calculateReviewRatingAverage";
 import Stars from "@/app/components/Stars";
 

@@ -7,7 +7,7 @@ const Reviews = ({ reviews }: { reviews: Review[] }) => {
     <div className="mt-10">
       {reviews.length ? (
         <>
-          <h3 className="font-bold text-3xl border-b mb-7 pb-5">
+          <h3 className="font-bold text-xl lg:text-3xl border-b mb-7 pb-5">
             {`What ${reviews.length} ${
               reviews.length === 1 ? "person is saying" : "people are saying"
             }`}

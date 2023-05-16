@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { RestaurantCardType } from "../page";
 import Price from "./Price";
 import Stars from "./Stars";
+import { RestaurantCardType } from "../page";
 
 const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
   return (

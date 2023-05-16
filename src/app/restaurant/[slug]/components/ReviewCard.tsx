@@ -9,21 +9,21 @@ const ReviewCard = ({ review }: { review: Review }) => {
 
   return (
     <div>
-      <div className="border-b pb-7 mb-7">
-        <div className="flex">
+      <div className="border-b pb-3 md:pb-7 mb-3 md:mb-7">
+        <div className="flex gap-10">
           <div className="w-1/6 flex flex-col items-center justify-center text-center gap-2">
-            <div className="rounded-full bg-blue-400 w-16 h-16 flex items-center justify-center">
-              <h2 className="text-white text-2xl">{initials}</h2>
+            <div className="rounded-full bg-blue-400 w-12 md:w-16 h-12 md:h-16 flex items-center justify-center">
+              <h2 className="text-white text-md md:text-2xl">{initials}</h2>
             </div>
             <p>{fullName}</p>
           </div>
 
-          <div className="ml-10 w-5/6">
+          <div className="w-5/6">
             <div className="flex items-center gap-5">
               <Stars rating={review.rating} reviews={[]} />
             </div>
             <div className="mt-5">
-              <p className="text-lg font-light">{review.text}</p>
+              <p className="text-sm md:text-lg font-light">{review.text}</p>
             </div>
           </div>
         </div>
