@@ -4,6 +4,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import AuthInputs from "./AuthInputs";
+import useAuth from "../../../hooks/useAuth";
 
 const style = {
   position: "absolute" as "absolute",
@@ -20,6 +21,7 @@ const style = {
 
 const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
   const [open, setOpen] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [inputs, setInputs] = useState({
     firstName: "",
     lastName: "",
@@ -28,7 +30,7 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
     city: "",
     password: "",
   });
-  const [disabled, setDisabled] = useState(true);
+  const { signIn } = useAuth();
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputs({
       ...inputs,
@@ -37,6 +39,9 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
   };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleClick = () => {
+    if (isLogin) signIn(inputs.email, inputs.password);
+  };
 
   useEffect(() => {
     if (isLogin) {
@@ -99,6 +104,7 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
                 <button
                   className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
                   disabled={disabled}
+                  onClick={handleClick}
                 >
                   {renderContent("Sign in", "Create Account")}
                 </button>
