@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import validator from "validator";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function POST(req: Request, res: Response) {
   const { firstName, lastName, email, password, phone, city } =
@@ -49,5 +52,17 @@ export async function POST(req: Request, res: Response) {
   if (errors.length) {
     return NextResponse.json({ errorMessage: errors[0] }, { status: 400 });
   }
+
+  const userWithEmail = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+  if (userWithEmail)
+    return NextResponse.json(
+      { errorMessage: "Email is associated with another account." },
+      { status: 400 }
+    );
+
   return NextResponse.json({ teste: "teste" });
 }
