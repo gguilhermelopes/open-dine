@@ -87,5 +87,5 @@ export async function POST(req: Request, res: Response) {
     .setExpirationTime("24h")
     .sign(secret);
 
-  return NextResponse.json({ teste: token });
+  return NextResponse.json({ token });
 }
