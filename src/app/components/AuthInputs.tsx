@@ -49,6 +49,7 @@ const AuthInputs = ({ inputs, handleChangeInput, isLogin }: InputProps) => {
             width="100%"
             value={inputs.city}
             onChange={handleChangeInput}
+            type="tel"
           />
         </div>
       )}
