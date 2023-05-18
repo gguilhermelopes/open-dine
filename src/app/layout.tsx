@@ -1,4 +1,5 @@
 import NavBar from "./components/NavBar";
+import AuthContext from "./context/AuthContext";
 import "./globals.css";
 import { Cabin, Inter, Josefin_Sans } from "next/font/google";
 
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${cabin.className} min-h-screen w-full bg-gray-100`}>
-        <header className="max-w-screen-2xl m-auto bg-white">
-          <NavBar />
-        </header>
-        {children}
+        <AuthContext>
+          <header className="max-w-screen-2xl m-auto bg-white">
+            <NavBar />
+          </header>
+          {children}
+        </AuthContext>
       </body>
     </html>
   );
