@@ -19,7 +19,7 @@ export async function POST(req: Request, res: Response) {
       valid: validator.isLength(password, {
         min: 1,
       }),
-      errorMessage: "Invalid passoword.",
+      errorMessage: "Invalid password.",
     },
   ];
 
@@ -41,8 +41,7 @@ export async function POST(req: Request, res: Response) {
   if (!userWithEmail)
     return NextResponse.json(
       {
-        errorMessage:
-          "The provided email address does not exist in our database.",
+        errorMessage: "This email address does not exist in our database.",
       },
       { status: 401 }
     );
@@ -51,7 +50,7 @@ export async function POST(req: Request, res: Response) {
 
   if (!isMatch)
     return NextResponse.json(
-      { errorMessage: "Invalid passoword." },
+      { errorMessage: "Invalid password." },
       { status: 401 }
     );
 

@@ -1,11 +1,12 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import AuthInputs from "./AuthInputs";
 import useAuth from "../../../hooks/useAuth";
 import { AuthenticationContext } from "../context/AuthContext";
+import { Alert, CircularProgress } from "@mui/material";
 
 const style = {
   position: "absolute" as "absolute",
@@ -31,6 +32,7 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
     city: "",
     password: "",
   });
+  const { data, error, loading } = useContext(AuthenticationContext);
   const { signIn } = useAuth();
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputs({
@@ -83,35 +85,47 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="p-2">
-            <div className="uppercase font-bold text-center pb-2 border-b mb-6">
-              <p className="text-sm">
-                {renderContent("Sign in", "Create your account")}
-              </p>
-            </div>
-            <div className="m-auto">
-              <h2 className="text-2xl font-light text-center">
-                {renderContent(
-                  "Log into your account",
-                  "Create your OpenDine account"
+          {!loading && (
+            <div className="p-2">
+              <div className="uppercase font-bold text-center pb-2 border-b mb-6">
+                <p className="text-sm">
+                  {renderContent("Sign in", "Create your account")}
+                </p>
+              </div>
+              <div className="m-auto">
+                <h2 className="text-2xl font-light text-center">
+                  {renderContent(
+                    "Log into your account",
+                    "Create your OpenDine account"
+                  )}
+                </h2>
+                <form onSubmit={(event) => event.preventDefault()}>
+                  <AuthInputs
+                    inputs={inputs}
+                    handleChangeInput={handleChangeInput}
+                    isLogin={isLogin}
+                  />
+                  <button
+                    className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
+                    disabled={disabled}
+                    onClick={handleClick}
+                  >
+                    {renderContent("Sign in", "Create Account")}
+                  </button>
+                </form>
+                {error && (
+                  <Alert severity="error" className="mt-6">
+                    {error}
+                  </Alert>
                 )}
-              </h2>
-              <form onSubmit={(event) => event.preventDefault()}>
-                <AuthInputs
-                  inputs={inputs}
-                  handleChangeInput={handleChangeInput}
-                  isLogin={isLogin}
-                />
-                <button
-                  className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
-                  disabled={disabled}
-                  onClick={handleClick}
-                >
-                  {renderContent("Sign in", "Create Account")}
-                </button>
-              </form>
+              </div>
             </div>
-          </div>
+          )}
+          {loading && (
+            <div className="flex py-24 justify-center items-center">
+              <CircularProgress />
+            </div>
+          )}
         </Box>
       </Modal>
     </div>
