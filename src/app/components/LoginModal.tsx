@@ -25,15 +25,17 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
   const [open, setOpen] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
     firstName: "",
     lastName: "",
-    email: "",
-    phone: "",
     city: "",
-    password: "",
+    phone: "",
   });
-  const { data, error, loading } = useContext(AuthenticationContext);
-  const { signIn } = useAuth();
+  const { data, error, loading, setAuthState } = useContext(
+    AuthenticationContext
+  );
+  const { signIn, signUp } = useAuth();
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputs({
       ...inputs,
@@ -41,9 +43,32 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
     });
   };
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setAuthState({ error: null, loading, data });
+    setInputs({
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      city: "",
+      phone: "",
+    });
+  };
   const handleClick = () => {
-    if (isLogin) signIn(inputs.email, inputs.password);
+    if (isLogin) {
+      signIn(inputs.email, inputs.password, handleClose);
+    } else {
+      signUp(
+        inputs.email,
+        inputs.password,
+        inputs.firstName,
+        inputs.lastName,
+        inputs.city,
+        inputs.phone,
+        handleClose
+      );
+    }
   };
 
   useEffect(() => {
@@ -108,13 +133,14 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
                   <button
                     className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
                     disabled={disabled}
+                    type="submit"
                     onClick={handleClick}
                   >
                     {renderContent("Sign in", "Create Account")}
                   </button>
                 </form>
                 {error && (
-                  <Alert severity="error" className="mt-6">
+                  <Alert variant="outlined" severity="error" className="mt-6">
                     {error}
                   </Alert>
                 )}
