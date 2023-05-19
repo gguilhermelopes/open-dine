@@ -1,11 +1,11 @@
 import { AuthenticationContext } from "@/app/context/AuthContext";
 import axios from "axios";
 import { useContext } from "react";
+export const MAIN_URL = "http://localhost:3000";
 
 const useAuth = () => {
   const { setAuthState } = useContext(AuthenticationContext);
 
-  const MAIN_URL = "http://localhost:3000";
   const signIn = async (
     email: string,
     password: string,
@@ -76,6 +76,7 @@ const useAuth = () => {
   return {
     signIn,
     signUp,
+    MAIN_URL,
   };
 };
 
