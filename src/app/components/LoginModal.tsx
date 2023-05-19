@@ -42,10 +42,12 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
       [event.target.id]: event.target.value,
     });
   };
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    setAuthState({ error: null, loading, data });
+  };
   const handleClose = () => {
     setOpen(false);
-    setAuthState({ error: null, loading, data });
     setInputs({
       email: "",
       password: "",
@@ -103,6 +105,7 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
       >
         {renderContent("Sign in", "Sign up")}
       </button>
+
       <Modal
         open={open}
         onClose={handleClose}

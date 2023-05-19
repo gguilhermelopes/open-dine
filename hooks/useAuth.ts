@@ -1,5 +1,6 @@
 import { AuthenticationContext } from "@/app/context/AuthContext";
 import axios from "axios";
+import { removeCookies } from "cookies-next";
 import { useContext } from "react";
 export const MAIN_URL = "http://localhost:3000";
 
@@ -72,10 +73,19 @@ const useAuth = () => {
       });
     }
   };
+  const signOut = async () => {
+    removeCookies("jwt");
+    setAuthState({
+      data: null,
+      error: null,
+      loading: false,
+    });
+  };
 
   return {
     signIn,
     signUp,
+    signOut,
     MAIN_URL,
   };
 };

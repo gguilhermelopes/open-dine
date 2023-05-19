@@ -10,7 +10,6 @@ import {
 } from "react";
 import { MAIN_URL } from "../../../hooks/useAuth";
 import axios from "axios";
-import { cookies } from "next/dist/client/components/headers";
 import { getCookie } from "cookies-next";
 
 interface User {
@@ -40,7 +39,7 @@ export const AuthenticationContext = createContext<AuthState>({
 
 const AuthContext = ({ children }: { children: ReactNode }) => {
   const [authState, setAuthState] = useState<State>({
-    loading: false,
+    loading: true,
     data: null,
     error: null,
   });
