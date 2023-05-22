@@ -1,7 +1,8 @@
 import NavBar from "./components/NavBar";
 import AuthContext from "./context/AuthContext";
 import "./globals.css";
-import { Cabin, Inter, Josefin_Sans } from "next/font/google";
+import { Cabin } from "next/font/google";
+import "react-datepicker/dist/react-datepicker.css";
 
 const cabin = Cabin({ subsets: ["latin"] });
 
