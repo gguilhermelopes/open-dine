@@ -1,4 +1,7 @@
 "use client";
+
+import { partySize } from "../../../../../data/partySize";
+
 const ReservationCard = () => {
   return (
     <div className="lg:fixed lg:w-[20%] bg-white rounded p-3 shadow flex flex-col">
@@ -12,9 +15,11 @@ const ReservationCard = () => {
           id="peopleSelection"
           className="py-1 border-b font-light bg-white mt-1"
         >
-          <option value="">1 person</option>
-          <option value="">2 people</option>
-          <option value="">3 people</option>
+          {partySize.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
+            </option>
+          ))}
         </select>
       </div>
       <div className="flex justify-between gap-4">
