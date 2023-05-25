@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { times } from "../../../../../../data";
 
 const prisma = new PrismaClient();
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string } }
@@ -25,11 +26,30 @@ export async function GET(
       { status: 400 }
     );
 
+  const restaurantId = await prisma.restaurant.findUnique({
+    where: {
+      slug,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (!restaurantId) {
+    return NextResponse.json(
+      { errorMessage: "Invalid data provided." },
+      { status: 400 }
+    );
+  }
+
   const bookings = await prisma.booking.findMany({
     where: {
       booking_time: {
         gte: new Date(`${day}T${searchTimes[0]}`),
         lte: new Date(`${day}T${searchTimes[searchTimes.length - 1]}`),
+      },
+      restaurant_id: {
+        equals: restaurantId.id,
       },
     },
     select: {
@@ -42,4 +62,4 @@ export async function GET(
   return NextResponse.json({ bookings });
 }
 
-// http://localhost:3000/api/restaurant/el-catrin-toronto/availability?day=2023-10-01&time=20:00:00.000Z&partySize=4
+// http://localhost:3000/api/restaurant/blu-ristorante-ottawa/availability?day=2023-05-27&time=14:00:00.000Z&partySize=4
