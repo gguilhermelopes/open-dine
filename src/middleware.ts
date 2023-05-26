@@ -33,5 +33,3 @@ export const middleware = async (req: NextRequest, res: NextResponse) => {
 export const config = {
   matcher: ["/api/auth/me"],
 };
-
-//teste
