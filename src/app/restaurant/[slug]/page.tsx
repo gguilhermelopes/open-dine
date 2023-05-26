@@ -56,6 +56,7 @@ const RestaurantDetails = async ({ params }: { params: { slug: string } }) => {
       </div>
       <div className="lg:w-[27%] w-full p-10 lg:p-0 lg:relative text-reg text-gray-800">
         <ReservationCard
+          slug={restaurantData.slug}
           openTime={restaurantData.open_time}
           closeTime={restaurantData.close_time}
         />

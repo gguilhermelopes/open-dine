@@ -118,7 +118,5 @@ export async function GET(
       return timeIsAfterOpeningHour && timeIsBeforeClosingHour;
     });
 
-  return NextResponse.json({
-    availabilities,
-  });
+  return NextResponse.json(availabilities);
 }
