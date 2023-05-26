@@ -95,9 +95,18 @@ export async function GET(
     });
   });
 
+  const availabilities = searchTimesWithTables.map((item) => {
+    const sumSeats = item.tables.reduce((sum, table) => {
+      return sum + table.seats;
+    }, 0);
+    return {
+      time: item.time,
+      available: sumSeats >= +partySize,
+    };
+  });
+
   return NextResponse.json({
-    bookingTablesObject,
-    searchTimesWithTables,
+    availabilities,
   });
 }
 
