@@ -1,20 +1,38 @@
 "use client";
 
 import ReactDatePicker from "react-datepicker";
-import { partySize, times } from "../../../../../data";
+import { partySize as partySizes, times } from "../../../../../data";
 import { useState } from "react";
+import useAvailabilities from "../../../../../hooks/useAvailabilities";
+import { CircularProgress } from "@mui/material";
+import Link from "next/link";
+import convertToDisplayTime from "../../../../../utils/convertToDisplayTime";
 
-const ReservationCard = ({
-  openTime,
-  closeTime,
-}: {
+interface Props {
   openTime: string;
   closeTime: string;
-}) => {
+  slug: string;
+}
+
+const ReservationCard = ({ openTime, closeTime, slug }: Props) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [time, setTime] = useState(openTime);
+  const [partySize, setPartySize] = useState(2);
+  const [day, setDay] = useState(new Date().toISOString().split("T")[0]);
+  const { data, loading, error, fetchAvailabilities } = useAvailabilities();
+
+  const handleClick = () => {
+    fetchAvailabilities({
+      slug,
+      day,
+      time,
+      partySize,
+    });
+  };
 
   const handleDateChange = (date: Date | null) => {
     if (date) {
+      setDay(date.toISOString().split("T")[0]);
       return setSelectedDate(date);
     }
     return setSelectedDate(null);
@@ -50,8 +68,10 @@ const ReservationCard = ({
           name="peopleSelection"
           id="peopleSelection"
           className="py-1 border-b font-light bg-white mt-1"
+          value={partySize}
+          onChange={({ target }) => setPartySize(+target.value)}
         >
-          {partySize.map((item) => (
+          {partySizes.map((item) => (
             <option key={item.value} value={item.value}>
               {item.label}
             </option>
@@ -73,6 +93,8 @@ const ReservationCard = ({
         <div className="flex flex-col lg:w-[48%] ">
           <label htmlFor="time">Time</label>
           <select
+            value={time}
+            onChange={({ target }) => setTime(target.value)}
             name="time"
             id="time"
             className="py-1.5 border-b font-light w-24 bg-white"
@@ -86,10 +108,39 @@ const ReservationCard = ({
         </div>
       </div>
       <div className="mt-5">
-        <button className="bg-red-600 rounded w-full px-4 text-white font-bold h-16">
-          Find a Time
+        <button
+          onClick={handleClick}
+          className="bg-red-600 rounded w-full px-4 text-white font-bold h-16 disabled:bg-gray-300"
+          disabled={loading}
+        >
+          {loading ? (
+            <CircularProgress size={20} color="inherit" />
+          ) : (
+            "Find a Time"
+          )}
         </button>
       </div>
+      {data?.length && !loading ? (
+        <div className="mt-4">
+          <p className="text-reg">Select a Time</p>
+          <div className="flex flex-wrap flex-1 mt-2 justify-between gap-2">
+            {data.map((item) =>
+              item.available ? (
+                <Link
+                  className="bg-red-600 cursor-pointer px-4 py-2 w-24 text-center text-white rounded"
+                  href={`/reserve/${slug}?date=${day}T${item.time}&partysize=${partySize}`}
+                >
+                  <p className="text-sm font-bold">
+                    {convertToDisplayTime(item.time)}
+                  </p>
+                </Link>
+              ) : (
+                <span className="bg-gray-300 cursor-pointer px-4 py-2 w-24 h-8 rounded" />
+              )
+            )}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
