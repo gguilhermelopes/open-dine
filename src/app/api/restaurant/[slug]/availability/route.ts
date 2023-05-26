@@ -26,16 +26,17 @@ export async function GET(
       { status: 400 }
     );
 
-  const restaurantId = await prisma.restaurant.findUnique({
+  const restaurant = await prisma.restaurant.findUnique({
     where: {
       slug,
     },
     select: {
       id: true,
+      tables: true,
     },
   });
 
-  if (!restaurantId) {
+  if (!restaurant) {
     return NextResponse.json(
       { errorMessage: "Invalid data provided." },
       { status: 400 }
@@ -49,7 +50,7 @@ export async function GET(
         lte: new Date(`${day}T${searchTimes[searchTimes.length - 1]}`),
       },
       restaurant_id: {
-        equals: restaurantId.id,
+        equals: restaurant.id,
       },
     },
     select: {
@@ -59,7 +60,45 @@ export async function GET(
     },
   });
 
-  return NextResponse.json({ bookings });
+  interface BookingTablesType {
+    [key: string]: { [key: number]: true };
+  }
+
+  const bookingTablesObject: BookingTablesType = {};
+
+  bookings.forEach((booking) => {
+    bookingTablesObject[booking.booking_time.toISOString()] =
+      booking.BookingsOnTables.reduce((obj, table) => {
+        return {
+          ...obj,
+          [table.table_id]: true,
+        };
+      }, {});
+  });
+
+  const { tables } = restaurant;
+
+  const searchTimesWithTables = searchTimes.map((searchTime) => {
+    return {
+      date: new Date(`${day}T${searchTime}`),
+      time: searchTime,
+      tables,
+    };
+  });
+
+  searchTimesWithTables.forEach((t) => {
+    t.tables = t.tables.filter((table) => {
+      if (bookingTablesObject[t.date.toISOString()]) {
+        if (bookingTablesObject[t.date.toISOString()][table.id]) return false;
+      }
+      return true;
+    });
+  });
+
+  return NextResponse.json({
+    bookingTablesObject,
+    searchTimesWithTables,
+  });
 }
 
 // http://localhost:3000/api/restaurant/blu-ristorante-ottawa/availability?day=2023-05-27&time=14:00:00.000Z&partySize=4
