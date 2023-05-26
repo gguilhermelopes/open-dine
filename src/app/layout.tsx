@@ -8,7 +8,7 @@ const cabin = Cabin({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Open Dine | Table for any occasion!",
-  description: "Open Dine",
+  description: "Open Dine, find your table for any occasion!",
 };
 
 export default function RootLayout({

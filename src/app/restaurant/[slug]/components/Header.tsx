@@ -1,14 +1,10 @@
-import NavBar from "@/app/components/NavBar";
+export const renderTitle = (title: string): string => {
+  const titleArray = title.split("-");
+  titleArray[titleArray.length - 1] = `(${titleArray[titleArray.length - 1]})`;
+  return titleArray.join(" ");
+};
 
 const Header = ({ title }: { title: string }) => {
-  const renderTitle = (title: string): string => {
-    const titleArray = title.split("-");
-    titleArray[titleArray.length - 1] = `(${
-      titleArray[titleArray.length - 1]
-    })`;
-    return titleArray.join(" ");
-  };
-
   return (
     <div className="h-60 lg:h-96 overflow-hidden">
       <div className="bg-center bg-gradient-to-r from-[#0f1f47] to-[#5f6984] h-full flex justify-center items-center">

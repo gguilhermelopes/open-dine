@@ -1,17 +1,22 @@
-import Header from "./components/Header";
+import capitalizeTitle from "../../../../utils/capitalizeTitle";
+import Header, { renderTitle } from "./components/Header";
 
-export const metadata = {
-  title: "Terraço Jardins | Open Dine",
-  description: "Open Dine",
-};
-
-const RestaurantLayout = ({
-  children,
-  params,
-}: {
+interface Props {
   children: React.ReactNode;
   params: { slug: string };
-}) => {
+}
+
+export const generateMetadata = async ({ params }: Props) => {
+  const titleLowerCase = renderTitle(params.slug);
+  const titleUpperCase = capitalizeTitle(titleLowerCase);
+
+  return {
+    title: `${titleUpperCase} | Open Dine`,
+    description: "Open Dine, find your table for any occasion!",
+  };
+};
+
+const RestaurantLayout = ({ children, params }: Props) => {
   return (
     <>
       <Header title={params.slug} />
