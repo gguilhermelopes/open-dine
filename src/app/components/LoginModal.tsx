@@ -7,21 +7,10 @@ import AuthInputs from "./AuthInputs";
 import useAuth from "../../../hooks/useAuth";
 import { AuthenticationContext } from "../context/AuthContext";
 import { Alert, CircularProgress } from "@mui/material";
-
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 450,
-  height: 600,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: 1,
-};
+import useMedia from "../../../hooks/useMedia";
 
 const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
+  const isMobile = useMedia("(max-width:768px");
   const [open, setOpen] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [inputs, setInputs] = useState({
@@ -94,6 +83,19 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
     return isLogin ? loginContent : signUpContent;
   };
 
+  const style = {
+    position: "absolute" as "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: isMobile ? 300 : 450,
+    height: isMobile ? 350 : 600,
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: isMobile ? 2 : 4,
+    borderRadius: 1,
+  };
+
   return (
     <div>
       <button
@@ -115,13 +117,13 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
         <Box sx={style}>
           {!loading && (
             <div className="p-2">
-              <div className="uppercase font-bold text-center pb-2 border-b mb-6">
+              <div className="uppercase font-bold text-center pb-2 border-b mb-3 md:mb-6">
                 <p className="text-sm">
                   {renderContent("Sign in", "Create your account")}
                 </p>
               </div>
               <div className="m-auto">
-                <h2 className="text-2xl font-light text-center">
+                <h2 className="text-md md:text-2xl font-light text-center">
                   {renderContent(
                     "Log into your account",
                     "Create your OpenDine account"

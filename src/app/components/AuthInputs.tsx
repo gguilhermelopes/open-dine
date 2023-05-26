@@ -17,7 +17,7 @@ const AuthInputs = ({ inputs, handleChangeInput, isLogin }: InputProps) => {
   return (
     <>
       {!isLogin && (
-        <div className="my-3 flex justify-between gap-4 text-sm">
+        <div className="my-2 md:my-3 flex justify-between gap-4 text-sm">
           <Input
             placeholder="First Name"
             id="firstName"
@@ -35,7 +35,7 @@ const AuthInputs = ({ inputs, handleChangeInput, isLogin }: InputProps) => {
         </div>
       )}
       {!isLogin && (
-        <div className="my-3 flex justify-between gap-4 text-sm">
+        <div className="my-2 md:my-3 flex justify-between gap-4 text-sm">
           <Input
             placeholder="Phone"
             id="phone"
@@ -53,7 +53,7 @@ const AuthInputs = ({ inputs, handleChangeInput, isLogin }: InputProps) => {
           />
         </div>
       )}
-      <div className="my-3 flex justify-between text-sm">
+      <div className="my-2 md:my-3 flex justify-between text-sm">
         <Input
           placeholder="Email"
           id="email"
@@ -63,7 +63,7 @@ const AuthInputs = ({ inputs, handleChangeInput, isLogin }: InputProps) => {
           onChange={handleChangeInput}
         />
       </div>
-      <div className="my-3 flex justify-between text-sm">
+      <div className="my-2 md:my-3 flex justify-between text-sm">
         <Input
           placeholder="Password"
           id="password"
