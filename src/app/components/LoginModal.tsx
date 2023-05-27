@@ -4,10 +4,10 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import AuthInputs from "./AuthInputs";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { AuthenticationContext } from "../context/AuthContext";
 import { Alert, CircularProgress } from "@mui/material";
-import useMedia from "../../../hooks/useMedia";
+import useMedia from "../../hooks/useMedia";
 
 const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
   const isMobile = useMedia("(max-width:768px");

@@ -8,7 +8,7 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { MAIN_URL } from "../../../hooks/useAuth";
+import { MAIN_URL } from "../../hooks/useAuth";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 

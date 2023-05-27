@@ -1,12 +1,12 @@
 "use client";
 
 import ReactDatePicker from "react-datepicker";
-import { partySize as partySizes, times } from "../../../../../data";
+import { partySize as partySizes, times } from "../../../../data";
 import { useState } from "react";
-import useAvailabilities from "../../../../../hooks/useAvailabilities";
+import useAvailabilities from "../../../../hooks/useAvailabilities";
 import { CircularProgress } from "@mui/material";
 import Link from "next/link";
-import convertToDisplayTime from "../../../../../utils/convertToDisplayTime";
+import convertToDisplayTime from "../../../../utils/convertToDisplayTime";
 
 interface Props {
   openTime: string;

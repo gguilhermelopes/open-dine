@@ -1,8 +1,5 @@
+import findAvailableTables from "@/services/restaurant/findAvailableTables";
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-import { times } from "../../../../../../data";
-
-const prisma = new PrismaClient();
 
 export async function GET(
   req: NextRequest,
@@ -18,84 +15,19 @@ export async function GET(
       { status: 400 }
     );
 
-  const searchTimes = times.find((item) => item.time === time)?.searchTimes;
+  const availableTables = await findAvailableTables({
+    time,
+    day,
+    slug,
+  });
 
-  if (!searchTimes)
+  if (!availableTables || availableTables instanceof NextResponse)
     return NextResponse.json(
       { errorMessage: "Invalid data provided." },
       { status: 400 }
     );
 
-  const restaurant = await prisma.restaurant.findUnique({
-    where: {
-      slug,
-    },
-    select: {
-      id: true,
-      tables: true,
-      open_time: true,
-      close_time: true,
-    },
-  });
-
-  if (!restaurant) {
-    return NextResponse.json(
-      { errorMessage: "Invalid data provided." },
-      { status: 400 }
-    );
-  }
-
-  const bookings = await prisma.booking.findMany({
-    where: {
-      booking_time: {
-        gte: new Date(`${day}T${searchTimes[0]}`),
-        lte: new Date(`${day}T${searchTimes[searchTimes.length - 1]}`),
-      },
-      restaurant_id: {
-        equals: restaurant.id,
-      },
-    },
-    select: {
-      number_of_people: true,
-      booking_time: true,
-      BookingsOnTables: true,
-    },
-  });
-
-  interface BookingTablesType {
-    [key: string]: { [key: number]: true };
-  }
-
-  const bookingTablesObject: BookingTablesType = {};
-
-  bookings.forEach((booking) => {
-    bookingTablesObject[booking.booking_time.toISOString()] =
-      booking.BookingsOnTables.reduce((obj, table) => {
-        return {
-          ...obj,
-          [table.table_id]: true,
-        };
-      }, {});
-  });
-
-  const { tables } = restaurant;
-
-  const searchTimesWithTables = searchTimes.map((searchTime) => {
-    return {
-      date: new Date(`${day}T${searchTime}`),
-      time: searchTime,
-      tables,
-    };
-  });
-
-  searchTimesWithTables.forEach((t) => {
-    t.tables = t.tables.filter((table) => {
-      if (bookingTablesObject[t.date.toISOString()]) {
-        if (bookingTablesObject[t.date.toISOString()][table.id]) return false;
-      }
-      return true;
-    });
-  });
+  const { searchTimesWithTables, restaurant } = availableTables;
 
   const availabilities = searchTimesWithTables
     .map((item) => {

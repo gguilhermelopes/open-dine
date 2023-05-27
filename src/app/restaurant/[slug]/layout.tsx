@@ -1,4 +1,4 @@
-import capitalizeTitle from "../../../../utils/capitalizeTitle";
+import capitalizeTitle from "../../../utils/capitalizeTitle";
 import Header, { renderTitle } from "./components/Header";
 
 interface Props {

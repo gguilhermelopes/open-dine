@@ -4,7 +4,7 @@ import Link from "next/link";
 import LoginModal from "./LoginModal";
 import { useContext } from "react";
 import { AuthenticationContext } from "../context/AuthContext";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { CircularProgress } from "@mui/material";
 
 const NavBar = () => {
