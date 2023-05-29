@@ -1,22 +1,35 @@
-import React from "react";
+import convertToDisplayTime from "@/utils/convertToDisplayTime";
+import { format } from "date-fns";
 
-const RestaurantSummary = () => {
+interface RestaurantSummaryProps {
+  image: string;
+  name: string;
+  date: string;
+  partySize: string;
+}
+
+const RestaurantSummary = ({
+  image,
+  name,
+  date,
+  partySize,
+}: RestaurantSummaryProps) => {
+  const [day, time] = date.split("T");
+
   return (
     <>
       <h3 className="text-lg">You're almost done!</h3>
       <div>
         <div className="flex mt-5 gap-4">
-          <img
-            src="https://resizer.otstatic.com/v2/photos/legacy/3/46883778.jpg"
-            alt=""
-            className="w-32 h-18 rounded"
-          />
+          <img src={image} alt={image} className="w-32 h-18 rounded" />
           <div>
-            <h1 className="text-3xl font-bold">The Waverley - Elgin</h1>
+            <h1 className="text-3xl font-bold">{name}</h1>
             <div className="flex mt-3 gap-6">
-              <p>Tuesday, May 9 2023</p>
-              <p>7:30PM</p>
-              <p>3 people</p>
+              <p>{format(new Date(date), "ccc, LLL dd")}</p>
+              <p>{convertToDisplayTime(time)}</p>
+              <p>
+                {partySize} {+partySize === 1 ? "person" : "people"}
+              </p>
             </div>
           </div>
         </div>

@@ -128,7 +128,7 @@ const ReservationCard = ({ openTime, closeTime, slug }: Props) => {
               item.available ? (
                 <Link
                   className="bg-red-600 cursor-pointer px-4 py-2 w-24 text-center text-white rounded"
-                  href={`/reserve/${slug}?date=${day}T${item.time}&partysize=${partySize}`}
+                  href={`/reserve/${slug}?date=${day}T${item.time}&partySize=${partySize}`}
                 >
                   <p className="text-sm font-bold">
                     {convertToDisplayTime(item.time)}
