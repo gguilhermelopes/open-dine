@@ -2,17 +2,17 @@ const Loading = () => {
   return (
     <>
       <main>
-        <div className="h-60 lg:h-96 overflow-hidden animate-pulse bg-slate-200 ">
+        <div className="h-36 lg:h-96 overflow-hidden animate-pulse bg-slate-200 ">
           <div className={`bg-center h-full`} />
         </div>
-        <div className="flex flex-col lg:flex-row m-auto lg:w-2/3 lg:justify-between items-start mt-10 lg:-mt-11">
-          <div className="bg-white w-[70%] rounded p-3 shadow">
+        <div className="flex flex-col lg:flex-row m-auto w-full lg:w-2/3 lg:justify-between items-start mt-10 lg:-mt-11">
+          <div className="bg-white w-full rounded p-3 shadow">
             <nav className="flex text-reg border-b pb-2">
               <h4 className="mr-7">Overview</h4>
               <p className="mr-7">Menu</p>
             </nav>
 
-            <div className="mt-4 border-b pb-6 animate-pulse bg-slate-200 w-[400px] h-16 rounded"></div>
+            <div className="mt-4 border-b pb-6 animate-pulse bg-slate-200 w-[275px]lg:w-[400px] h-16 rounded"></div>
 
             <div className="flex items-end animate-pulse">
               <div className="ratings mt-2 flex items-center">

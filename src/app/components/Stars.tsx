@@ -21,7 +21,11 @@ const Stars = ({ reviews, rating }: { reviews: Review[]; rating?: number }) => {
       } else stars.push(emptyStar);
     }
     return stars.map((star) => (
-      <Image className="w-4 h-4" src={star} alt="star" />
+      <Image
+        className="w-3 h-3 md:w-4 md:h-4 bg-inherit"
+        src={star}
+        alt="star"
+      />
     ));
   };
   return <div className="flex items-center gap-1">{renderStars()}</div>;

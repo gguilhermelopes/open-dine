@@ -20,7 +20,7 @@ const NavBar = () => {
           {data ? (
             <button
               onClick={signOut}
-              className="border p-1 px-4 rounded-md bg-[#257f9e] text-white"
+              className="border p-1 px-4 rounded-md bg-[#257f9e] text-white ease-in-out duration-300 hover:bg-[#20657d]"
             >
               Logout
             </button>

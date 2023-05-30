@@ -65,7 +65,7 @@ const Search = async ({ searchParams }: { searchParams: SearchParams }) => {
       <div className="bg-gradient-to-r from-[#5f6984] to-[#0f1f47] p-2">
         <SearchBar />
       </div>
-      <main className="flex py-4 m-auto gap-8 justify-between items-start w-2/3 text-gray-800">
+      <main className="flex py-4 m-auto gap-8 justify-center md:justify-between items-start md:w-2/3 text-gray-800">
         <SearchSideBar
           cuisines={cuisines}
           locations={locations}

@@ -6,7 +6,7 @@ import { RestaurantCardType } from "../page";
 const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
   return (
     <Link href={`restaurant/${restaurant.slug}`}>
-      <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer text-gray-800">
+      <div className="w-64 h-72 rounded overflow-hidden border cursor-pointer text-gray-800 ease-in-out duration-300 hover:scale-105">
         <img
           src={restaurant.main_image}
           alt=""
@@ -25,7 +25,6 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
             <Price price={restaurant.price} />
             <p>{restaurant.location.name}</p>
           </div>
-          <p className="text-sm mt-1 font-bold">Booked 3 times today</p>
         </div>
       </div>
     </Link>

@@ -6,11 +6,11 @@ const Loading = () => {
     <>
       <Header />
       <main>
-        <div className="py-3 px-3 lg:px-36 mt-5 sm:mt-10 flex flex-wrap justify-center">
+        <div className="py-3 px-3 gap-4 lg:px-36 mt-5 sm:mt-10 flex flex-wrap justify-center">
           {numArray.map((item) => (
             <div
               key={item}
-              className="animate-pulse bg-slate-200 m-3 w-64 h-72 rounded overflow-hidden border cursor-pointer"
+              className="animate-pulse bg-slate-200 w-64 h-72 rounded overflow-hidden border cursor-pointer"
             ></div>
           ))}
         </div>

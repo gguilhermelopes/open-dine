@@ -99,8 +99,8 @@ const ReservationCard = ({ openTime, closeTime, slug }: Props) => {
             id="time"
             className="py-1.5 border-b font-light w-24 bg-white"
           >
-            {filterTimeByRestaurantOpenWindow().map((time) => (
-              <option key={time.displayTime} value={time.time}>
+            {filterTimeByRestaurantOpenWindow().map((time, index) => (
+              <option key={index} value={time.time}>
                 {time.displayTime}
               </option>
             ))}
@@ -110,13 +110,13 @@ const ReservationCard = ({ openTime, closeTime, slug }: Props) => {
       <div className="mt-5">
         <button
           onClick={handleClick}
-          className="bg-red-600 rounded w-full px-4 text-white font-bold h-16 disabled:bg-gray-300"
+          className="bg-red-600 flex justify-center items-center rounded w-full px-4 text-white font-bold h-8 ease-in-out duration-300 disabled:bg-gray-300 hover:bg-red-700"
           disabled={loading}
         >
           {loading ? (
             <CircularProgress size={20} color="inherit" />
           ) : (
-            "Find a Time"
+            "Find a time"
           )}
         </button>
       </div>
@@ -127,7 +127,7 @@ const ReservationCard = ({ openTime, closeTime, slug }: Props) => {
             {data.map((item) =>
               item.available ? (
                 <Link
-                  className="bg-red-600 cursor-pointer px-4 py-2 w-24 text-center text-white rounded"
+                  className="bg-red-600 cursor-pointer px-4 py-2 w-24 text-center text-white rounded ease-in-out duration-300 hover:bg-red-700"
                   href={`/reserve/${slug}?date=${day}T${item.time}&partySize=${partySize}`}
                 >
                   <p className="text-sm font-bold">

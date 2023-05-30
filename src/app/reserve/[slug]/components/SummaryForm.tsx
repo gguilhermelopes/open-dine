@@ -131,7 +131,7 @@ const SummaryForm = ({ slug, partySize, date }: SummaryFormProps) => {
 
           <button
             disabled={disabled || loading}
-            className="bg-red-600 w-full flex justify-center items-center p-3 text-white font-bold rounded disabled:bg-gray-300"
+            className="bg-red-600 w-full flex justify-center items-center p-3 text-white font-bold rounded ease-in-out duration-300 disabled:bg-gray-300 hover:bg-red-700"
             onClick={handleClick}
           >
             {loading ? (

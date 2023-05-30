@@ -100,9 +100,9 @@ const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
     <div>
       <button
         onClick={handleOpen}
-        className={`border p-1 px-4 rounded-md ${renderContent(
-          "bg-[#257f9e] text-white",
-          ""
+        className={`border p-1 px-4 rounded-md ease-in-out duration-300 ${renderContent(
+          "bg-[#257f9e] text-white hover:bg-[#20657d]",
+          "hover:bg-[#eee]"
         )}`}
       >
         {renderContent("Sign in", "Sign up")}

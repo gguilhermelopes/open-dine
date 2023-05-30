@@ -19,10 +19,12 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
       <img
         src={restaurant.main_image}
         alt=""
-        className="w-44 h-36 object-cover rounded"
+        className="w-36 h-28 lg:w-44 lg:h-36 object-cover rounded"
       />
       <div>
-        <h2 className="text-3xl text-[#0f1f47]">{restaurant.name}</h2>
+        <h2 className="text-xl lg:text-3xl text-[#0f1f47]">
+          {restaurant.name}
+        </h2>
         <div className="flex items-center gap-2">
           <Stars reviews={restaurant.reviews} />
           <p className="text-sm">{textRating}</p>
@@ -36,8 +38,11 @@ const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
           </div>
         </div>
         <div>
-          <Link href={`restaurant/${restaurant.slug}`} className="text-red-600">
-            View more information
+          <Link
+            href={`restaurant/${restaurant.slug}`}
+            className="text-red-600 ease-in-out duration-300 hover:text-red-700 hover:font-bold "
+          >
+            View more
           </Link>
         </div>
       </div>
