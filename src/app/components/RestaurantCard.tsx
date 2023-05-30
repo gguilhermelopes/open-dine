@@ -1,18 +1,7 @@
 import Link from "next/link";
 import Price from "./Price";
 import Stars from "./Stars";
-import { Cuisine, Location, PRICE, Review } from "@prisma/client";
-
-interface RestaurantCardType {
-  id: number;
-  name: string;
-  main_image: string;
-  slug: string;
-  cuisine: Cuisine;
-  location: Location;
-  price: PRICE;
-  reviews: Review[];
-}
+import { RestaurantCardType } from "../page";
 
 const RestaurantCard = ({ restaurant }: { restaurant: RestaurantCardType }) => {
   return (
