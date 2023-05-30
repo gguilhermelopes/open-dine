@@ -1,6 +1,12 @@
 {
   "name": "open-dine",
   "version": "0.1.0",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",
