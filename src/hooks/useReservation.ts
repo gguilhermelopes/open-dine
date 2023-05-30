@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Dispatch, SetStateAction, useState } from "react";
-import { MAIN_URL } from "./useAuth";
 import { OCCASION } from "@prisma/client";
 
 interface Props {
@@ -37,7 +36,7 @@ const useReservation = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${MAIN_URL}/api/restaurant/${slug}/reserve`,
+        `/api/restaurant/${slug}/reserve`,
         {
           bookerFirstName,
           bookerLastName,

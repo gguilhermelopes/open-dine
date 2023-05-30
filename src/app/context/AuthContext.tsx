@@ -8,7 +8,6 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { MAIN_URL } from "../../hooks/useAuth";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
@@ -60,7 +59,7 @@ const AuthContext = ({ children }: { children: ReactNode }) => {
         });
       }
 
-      const response = await axios.get(`${MAIN_URL}/api/auth/me`, {
+      const response = await axios.get(`/api/auth/me`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import { MAIN_URL } from "./useAuth";
 
 interface Props {
   slug: string;
@@ -22,16 +21,13 @@ const useAvailabilities = () => {
   const fetchAvailabilities = async ({ slug, partySize, day, time }: Props) => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `${MAIN_URL}/api/restaurant/${slug}/availability`,
-        {
-          params: {
-            day,
-            time,
-            partySize,
-          },
-        }
-      );
+      const response = await axios.get(`/api/restaurant/${slug}/availability`, {
+        params: {
+          day,
+          time,
+          partySize,
+        },
+      });
       setLoading(false);
       setData(response.data);
     } catch (error: any) {

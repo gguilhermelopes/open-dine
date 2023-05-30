@@ -2,7 +2,6 @@ import { AuthenticationContext } from "@/app/context/AuthContext";
 import axios from "axios";
 import { removeCookies } from "cookies-next";
 import { useContext } from "react";
-export const MAIN_URL = "http://localhost:3000";
 
 const useAuth = () => {
   const { setAuthState } = useContext(AuthenticationContext);
@@ -18,7 +17,7 @@ const useAuth = () => {
       loading: true,
     });
     try {
-      const response = await axios.post(`${MAIN_URL}/api/auth/signin`, {
+      const response = await axios.post(`/api/auth/signin`, {
         email,
         password,
       });
@@ -51,7 +50,7 @@ const useAuth = () => {
       loading: true,
     });
     try {
-      const response = await axios.post(`${MAIN_URL}/api/auth/signup`, {
+      const response = await axios.post(`/api/auth/signup`, {
         email,
         password,
         firstName,
@@ -86,7 +85,6 @@ const useAuth = () => {
     signIn,
     signUp,
     signOut,
-    MAIN_URL,
   };
 };
 
