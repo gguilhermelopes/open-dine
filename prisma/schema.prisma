@@ -65,6 +65,13 @@ enum PRICE {
   EXPENSIVE
 }
 
+enum OCCASION {
+  BIRTHDAY
+  ANNIVERSARY
+  DATE_NIGHT
+  BUSINESS_MEAL
+}
+
 model User {
   id         Int      @id @default(autoincrement())
   first_name String
@@ -100,7 +107,7 @@ model Booking {
   booker_phone      String
   booker_first_name String
   booker_last_name  String
-  booker_occasion   String?
+  booker_occasion   OCCASION?
   booker_requests   String?
   restaurant_id     Int
   restaurant        Restaurant         @relation(fields: [restaurant_id], references: [id])

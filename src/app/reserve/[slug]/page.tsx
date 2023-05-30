@@ -31,14 +31,18 @@ const Reservation = async ({
 
   return (
     <section className="border-t text-gray-800">
-      <div className="py-9 w-3/5 m-auto">
+      <div className="py-9 px-5 w-full md:w-3/5 m-auto">
         <RestaurantSummary
           image={restaurant.main_image}
           name={restaurant.name}
           date={searchParams.date}
           partySize={searchParams.partySize}
         />
-        <SummaryForm />
+        <SummaryForm
+          slug={restaurant.slug}
+          partySize={searchParams.partySize}
+          date={searchParams.date}
+        />
       </div>
     </section>
   );

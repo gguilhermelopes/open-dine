@@ -10,7 +10,7 @@ import { Alert, CircularProgress } from "@mui/material";
 import useMedia from "../../hooks/useMedia";
 
 const LoginModal = ({ isLogin }: { isLogin?: boolean }) => {
-  const isMobile = useMedia("(max-width:768px");
+  const isMobile = useMedia("(max-width:768px)");
   const [open, setOpen] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [inputs, setInputs] = useState({
