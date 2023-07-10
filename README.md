@@ -26,7 +26,7 @@ Execute os seguintes comandos a partir da pasta raiz do projeto:
 ### Clone este repositório
 
 ```bash
-git clone https://github.com/gguilhermelopes/open-dine)
+git clone https://github.com/gguilhermelopes/open-dine
 ```
 
 ### Instale as dependências
